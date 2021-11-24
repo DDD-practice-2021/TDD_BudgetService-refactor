@@ -32,25 +32,28 @@ namespace BudgetSystem
                     
                     while (currentYearMonth<=endYearMonth)
                     {
+                        int days;
                         if (currentYearMonth.ToString("yyyyMM") == start.ToString("yyyyMM"))
                         {
                             var lastDayOfStartMonth = new DateTime(start.Year, start.Month, DateTime.DaysInMonth(start.Year, start.Month));
-                            var days = (lastDayOfStartMonth - start).Days+1;
-                            amount+= days * GetAmountForOneDay(start, allAmount);
+                            // var days = (lastDayOfStartMonth - start).Days+1;
+                            days = (lastDayOfStartMonth - start).Days+1;
+                            // amount+= days * GetAmountForOneDay(start, allAmount);
                         }
                         else if (currentYearMonth.ToString("yyyyMM") == end.ToString("yyyyMM"))
                         {
                              var firstDayOfEndMonth = new DateTime(end.Year, end.Month, 1);
-                             var days = (end - firstDayOfEndMonth).Days + 1; 
-                             amount += days * GetAmountForOneDay(end, allAmount);
+                             // var days = (end - firstDayOfEndMonth).Days + 1; 
+                             days = (end - firstDayOfEndMonth).Days + 1; 
+                             // amount += days * GetAmountForOneDay(end, allAmount);
                         }
                         else
                         {
-                            // amount+= DateTime.DaysInMonth(currentYearMonth.Year, currentYearMonth.Month) * GetAmountForOneDay(currentYearMonth, allAmount);
-                            var days = DateTime.DaysInMonth(currentYearMonth.Year, currentYearMonth.Month);
-                            amount+= days * GetAmountForOneDay(currentYearMonth, allAmount);
+                            // var days = DateTime.DaysInMonth(currentYearMonth.Year, currentYearMonth.Month);
+                            days = DateTime.DaysInMonth(currentYearMonth.Year, currentYearMonth.Month);
                         }
 
+                        amount+= days * GetAmountForOneDay(currentYearMonth, allAmount);
                         currentYearMonth=currentYearMonth.AddMonths(1);
                     }
                 }
