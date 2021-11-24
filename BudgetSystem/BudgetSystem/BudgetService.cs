@@ -28,22 +28,10 @@ namespace BudgetSystem
                 
                 if (startYearMonth != endYearMonth)
                 {
-                    // var lastDayOfStartMonth = new DateTime(start.Year, start.Month, DateTime.DaysInMonth(start.Year, start.Month));
-                    // var days = (lastDayOfStartMonth - start).Days+1;
-                    // amount+= days * GetAmountForOneDay(start, allAmount);
-                    //
-                    // var firstDayOfEndMonth = new DateTime(end.Year, end.Month, 1);
-                    // days = (end - firstDayOfEndMonth).Days + 1;
-                    // amount += days * GetAmountForOneDay(end, allAmount);
-                
-                
-
-                    // var currentYearMonth = new DateTime(start.Year,start.Month+1,1);
                     var currentYearMonth = new DateTime(start.Year,start.Month,1);
-                    // var lastSecondEndYearMonth = new DateTime(end.Year,end.Month-1,1);
-                    var lastSecondEndYearMonth = new DateTime(end.Year,end.Month,1);
+                    // var lastSecondEndYearMonth = new DateTime(end.Year,end.Month,1);
                 
-                    while (currentYearMonth<=lastSecondEndYearMonth)
+                    while (currentYearMonth<=endYearMonth)
                     {
                         var yearMonth = currentYearMonth.ToString("yyyyMM");
                         if (yearMonth == start.ToString("yyyyMM"))
