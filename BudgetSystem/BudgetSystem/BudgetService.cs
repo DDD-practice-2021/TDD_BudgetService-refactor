@@ -15,17 +15,16 @@ namespace BudgetSystem
 
         public decimal Query(DateTime start, DateTime end)
         {
-
+            var allAmount = _budgetRepo.GetAll();
             if (start == end)
             {
-                var allAmount = _budgetRepo.GetAll();
-                // var yearMonth = start.ToString("yyyyMM");
+                // var allAmount = _budgetRepo.GetAll();
                 return GetAmountForOneDay(start, allAmount);
 
             }
             if (start < end)
             {
-                var allAmount = _budgetRepo.GetAll();
+                // var allAmount = _budgetRepo.GetAll();
                 
                 var amount=0;
                 var startYearMonth = new DateTime(start.Year,start.Month,1);
