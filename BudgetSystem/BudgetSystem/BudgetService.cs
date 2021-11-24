@@ -46,8 +46,9 @@ namespace BudgetSystem
                         }
                         else
                         {
-                            // amount+=GetAmountForAllMonth(allAmount, currentYearMonth.ToString("yyyyMM"));
-                            amount+= DateTime.DaysInMonth(currentYearMonth.Year, currentYearMonth.Month) * GetAmountForOneDay(currentYearMonth, allAmount);
+                            // amount+= DateTime.DaysInMonth(currentYearMonth.Year, currentYearMonth.Month) * GetAmountForOneDay(currentYearMonth, allAmount);
+                            var days = DateTime.DaysInMonth(currentYearMonth.Year, currentYearMonth.Month);
+                            amount+= days * GetAmountForOneDay(currentYearMonth, allAmount);
                         }
 
                         currentYearMonth=currentYearMonth.AddMonths(1);
@@ -69,11 +70,5 @@ namespace BudgetSystem
             return budget == null ? 0 : budget.Amount /
                    DateTime.DaysInMonth(start.Year, start.Month);
         }
-
-        // private static int GetAmountForAllMonth(List<Budget> allAmount, string yearMonth)
-        // {
-        //     var budget = allAmount.FirstOrDefault(x => x.YearMonth.Equals(yearMonth));
-        //     return budget?.Amount ?? 0;
-        // }
     }
 }
