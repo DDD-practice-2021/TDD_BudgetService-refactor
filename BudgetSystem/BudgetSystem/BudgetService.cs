@@ -28,24 +28,40 @@ namespace BudgetSystem
                 
                 if (startYearMonth != endYearMonth)
                 {
-                    var lastDayOfStartMonth = new DateTime(start.Year, start.Month, DateTime.DaysInMonth(start.Year, start.Month));
-                    var days = (lastDayOfStartMonth - start).Days+1;
-                    amount+= days * GetAmountForOneDay(start, allAmount);
-
-                    var firstDayOfEndMonth = new DateTime(end.Year, end.Month, 1);
-                    days = (end - firstDayOfEndMonth).Days + 1;
-                    amount += days * GetAmountForOneDay(end, allAmount);
+                    // var lastDayOfStartMonth = new DateTime(start.Year, start.Month, DateTime.DaysInMonth(start.Year, start.Month));
+                    // var days = (lastDayOfStartMonth - start).Days+1;
+                    // amount+= days * GetAmountForOneDay(start, allAmount);
+                    //
+                    // var firstDayOfEndMonth = new DateTime(end.Year, end.Month, 1);
+                    // days = (end - firstDayOfEndMonth).Days + 1;
+                    // amount += days * GetAmountForOneDay(end, allAmount);
                 
                 
 
-                    // var secondYearMonth = new DateTime(start.Year,start.Month+1,1);
-                    var currentYearMonth = new DateTime(start.Year,start.Month+1,1);
-                    var lastSecondEndYearMonth = new DateTime(end.Year,end.Month-1,1);
+                    // var currentYearMonth = new DateTime(start.Year,start.Month+1,1);
+                    var currentYearMonth = new DateTime(start.Year,start.Month,1);
+                    // var lastSecondEndYearMonth = new DateTime(end.Year,end.Month-1,1);
+                    var lastSecondEndYearMonth = new DateTime(end.Year,end.Month,1);
                 
                     while (currentYearMonth<=lastSecondEndYearMonth)
                     {
                         var yearMonth = currentYearMonth.ToString("yyyyMM");
-                        amount+=GetAmountForAllMonth(allAmount, yearMonth);
+                        if (yearMonth == start.ToString("yyyyMM"))
+                        {
+                            var lastDayOfStartMonth = new DateTime(start.Year, start.Month, DateTime.DaysInMonth(start.Year, start.Month));
+                            var days = (lastDayOfStartMonth - start).Days+1;
+                            amount+= days * GetAmountForOneDay(start, allAmount);
+                        }
+                        else if (yearMonth == end.ToString("yyyyMM"))
+                        {
+                             var firstDayOfEndMonth = new DateTime(end.Year, end.Month, 1);
+                             var days = (end - firstDayOfEndMonth).Days + 1; 
+                             amount += days * GetAmountForOneDay(end, allAmount);
+                        }
+                        else
+                        {
+                            amount+=GetAmountForAllMonth(allAmount, yearMonth);
+                        }
 
                         currentYearMonth=currentYearMonth.AddMonths(1);
                     }
