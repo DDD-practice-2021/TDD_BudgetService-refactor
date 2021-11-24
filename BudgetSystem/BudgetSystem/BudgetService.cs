@@ -18,21 +18,19 @@ namespace BudgetSystem
             var allAmount = _budgetRepo.GetAll();
             if (start == end)
             {
-                // var allAmount = _budgetRepo.GetAll();
                 return GetAmountForOneDay(start, allAmount);
-
             }
             if (start < end)
             {
-                // var allAmount = _budgetRepo.GetAll();
-                
                 var amount=0;
                 var startYearMonth = new DateTime(start.Year,start.Month,1);
-                var lendYearMonth = new DateTime(end.Year,end.Month,1);
+                // var lendYearMonth = new DateTime(end.Year,end.Month,1);
+                var endYearMonth = new DateTime(end.Year,end.Month,1);
                 
 
                 
-                if (startYearMonth != lendYearMonth)
+                // if (startYearMonth != lendYearMonth)
+                if (startYearMonth != endYearMonth)
                 {
                     var lastDayOfStartMonth = new DateTime(start.Year, start.Month, DateTime.DaysInMonth(start.Year, start.Month));
                     var days = (lastDayOfStartMonth - start).Days+1;
