@@ -18,7 +18,9 @@ namespace BudgetSystem
             var allAmount = _budgetRepo.GetAll();
             if (start == end)
             {
-                return GetAmountForOneDay(start, allAmount);
+                var budget = allAmount.FirstOrDefault(x => x.YearMonth.Equals(start.ToString("yyyyMM")));
+                return budget == null ? 0 : budget.Amount /
+                                            DateTime.DaysInMonth(start.Year, start.Month);
             }
             if (start < end)
             {
@@ -48,24 +50,23 @@ namespace BudgetSystem
                             days = DateTime.DaysInMonth(currentYearMonth.Year, currentYearMonth.Month);
                         }
 
-                        amount+= days * GetAmountForOneDay(currentYearMonth, allAmount);
+                        var budget = allAmount.FirstOrDefault(x => x.YearMonth.Equals(currentYearMonth.ToString("yyyyMM")));
+                        amount+= days * (budget == null ? 0 : budget.Amount /
+                                                              DateTime.DaysInMonth(currentYearMonth.Year, currentYearMonth.Month));
                         currentYearMonth=currentYearMonth.AddMonths(1);
                     }
                 }
-                // else
-                // {
-                //     return ((end - start).Days + 1) * GetAmountForOneDay(start, allAmount);
-                // }
+               
                 return amount;
             }
             return 0;
         }
 
-        private int GetAmountForOneDay(DateTime start, List<Budget> allAmount)
-        {
-            var budget = allAmount.FirstOrDefault(x => x.YearMonth.Equals(start.ToString("yyyyMM")));
-            return budget == null ? 0 : budget.Amount /
-                   DateTime.DaysInMonth(start.Year, start.Month);
-        }
+        // private int GetAmountForOneDay(DateTime start, List<Budget> allAmount)
+        // {
+        //     var budget = allAmount.FirstOrDefault(x => x.YearMonth.Equals(start.ToString("yyyyMM")));
+        //     return budget == null ? 0 : budget.Amount /
+        //            DateTime.DaysInMonth(start.Year, start.Month);
+        // }
     }
 }
