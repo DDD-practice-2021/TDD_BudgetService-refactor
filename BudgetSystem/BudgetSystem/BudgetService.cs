@@ -19,7 +19,7 @@ namespace BudgetSystem
             if (start == end)
             {
                 var allAmount = _budgetRepo.GetAll();
-                var yearMonth = start.ToString("yyyyMM");
+                // var yearMonth = start.ToString("yyyyMM");
                 return GetAmountForOneDay(start, allAmount);
 
             }
