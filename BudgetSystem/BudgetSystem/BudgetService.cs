@@ -24,12 +24,8 @@ namespace BudgetSystem
             {
                 var amount=0;
                 var startYearMonth = new DateTime(start.Year,start.Month,1);
-                // var lendYearMonth = new DateTime(end.Year,end.Month,1);
                 var endYearMonth = new DateTime(end.Year,end.Month,1);
                 
-
-                
-                // if (startYearMonth != lendYearMonth)
                 if (startYearMonth != endYearMonth)
                 {
                     var lastDayOfStartMonth = new DateTime(start.Year, start.Month, DateTime.DaysInMonth(start.Year, start.Month));
@@ -42,15 +38,16 @@ namespace BudgetSystem
                 
                 
 
-                    var secondYearMonth = new DateTime(start.Year,start.Month+1,1);
+                    // var secondYearMonth = new DateTime(start.Year,start.Month+1,1);
+                    var currentYearMonth = new DateTime(start.Year,start.Month+1,1);
                     var lastSecondEndYearMonth = new DateTime(end.Year,end.Month-1,1);
                 
-                    while (secondYearMonth<=lastSecondEndYearMonth)
+                    while (currentYearMonth<=lastSecondEndYearMonth)
                     {
-                        var yearMonth = secondYearMonth.ToString("yyyyMM");
+                        var yearMonth = currentYearMonth.ToString("yyyyMM");
                         amount+=GetAmountForAllMonth(allAmount, yearMonth);
 
-                        secondYearMonth=secondYearMonth.AddMonths(1);
+                        currentYearMonth=currentYearMonth.AddMonths(1);
                     }
                 }
                 else
