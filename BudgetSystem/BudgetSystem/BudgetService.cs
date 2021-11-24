@@ -32,7 +32,6 @@ namespace BudgetSystem
                     
                     while (currentYearMonth<=endYearMonth)
                     {
-                        // var yearMonth = currentYearMonth.ToString("yyyyMM");
                         if (currentYearMonth.ToString("yyyyMM") == start.ToString("yyyyMM"))
                         {
                             var lastDayOfStartMonth = new DateTime(start.Year, start.Month, DateTime.DaysInMonth(start.Year, start.Month));
@@ -47,7 +46,8 @@ namespace BudgetSystem
                         }
                         else
                         {
-                            amount+=GetAmountForAllMonth(allAmount, currentYearMonth.ToString("yyyyMM"));
+                            // amount+=GetAmountForAllMonth(allAmount, currentYearMonth.ToString("yyyyMM"));
+                            amount+= DateTime.DaysInMonth(currentYearMonth.Year, currentYearMonth.Month) * GetAmountForOneDay(currentYearMonth, allAmount);
                         }
 
                         currentYearMonth=currentYearMonth.AddMonths(1);
@@ -70,10 +70,10 @@ namespace BudgetSystem
                    DateTime.DaysInMonth(start.Year, start.Month);
         }
 
-        private static int GetAmountForAllMonth(List<Budget> allAmount, string yearMonth)
-        {
-            var budget = allAmount.FirstOrDefault(x => x.YearMonth.Equals(yearMonth));
-            return budget?.Amount ?? 0;
-        }
+        // private static int GetAmountForAllMonth(List<Budget> allAmount, string yearMonth)
+        // {
+        //     var budget = allAmount.FirstOrDefault(x => x.YearMonth.Equals(yearMonth));
+        //     return budget?.Amount ?? 0;
+        // }
     }
 }
